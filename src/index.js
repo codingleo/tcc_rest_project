@@ -39,8 +39,8 @@ app.get('/users', async (req, res) => {
   return res.json(users)
 })
 
-app.get('/users/:id', async (req, res) => {
-  const user = await User.findByPk(req.query.id)
+app.get('/user/:id', async (req, res) => {
+  const user = await User.findByPk(req.params.id)
   return res.json(user)
 })
 
@@ -50,12 +50,12 @@ app.post('/user', async (req, res) => {
 })
 
 app.put('/user/:id', async (req, res) => {
-  const user = await User.update({ ...req.body }, { where: { id: req.body.id } }).then(() => User.findByPk(req.body.id))
+  const user = await User.update({ ...req.body }, { where: { id: req.params.id } }).then(() => User.findByPk(req.params.id))
   return res.json(user)
 })
 
 app.delete('/user/:id', async (req, res) => {
-  const result = await User.destroy({ where: { id: req.body.id } })
+  const result = await User.destroy({ where: { id: req.params.id } })
   return res.json(result)
 })
 
