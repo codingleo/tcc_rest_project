@@ -45,7 +45,7 @@ app.get('/user/:id', async (req, res) => {
 })
 
 app.post('/user', async (req, res) => {
-  const user = await User.create({ ...req.body })
+  const user = await User.create({ ...req.params })
   return res.json(user)
 })
 
