@@ -46,7 +46,7 @@ app.get('/user/:id', async (req, res) => {
 
 app.post('/user', async (req, res) => {
   try {
-    const user = await User.create({ ...req.params })
+    const user = await User.create({ ...req.body })
     return res.json(user)
   } catch (e) {
     console.error(e)
