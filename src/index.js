@@ -45,18 +45,30 @@ app.get('/user/:id', async (req, res) => {
 })
 
 app.post('/user', async (req, res) => {
-  const user = await User.create({ ...req.params })
-  return res.json(user)
+  try {
+    const user = await User.create({ ...req.params })
+    return res.json(user)
+  } catch (e) {
+    console.error(e)
+  }
 })
 
 app.put('/user/:id', async (req, res) => {
-  const user = await User.update({ ...req.body }, { where: { id: req.params.id } }).then(() => User.findByPk(req.params.id))
-  return res.json(user)
+  try {
+    const user = await User.update({ ...req.body }, { where: { id: req.params.id } }).then(() => User.findByPk(req.params.id))
+    return res.json(user)
+  } catch (e) {
+    console.error(e)
+  }
 })
 
 app.delete('/user/:id', async (req, res) => {
-  const result = await User.destroy({ where: { id: req.params.id } })
-  return res.json(result)
+  try {
+    const result = await User.destroy({ where: { id: req.params.id } })
+    return res.json(result)
+  } catch (e) {
+    console.error(e)
+  }
 })
 
 app.listen(port, () => {
