@@ -35,12 +35,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', async (req, res) => {
-  const users = await User.findAll()
-  return res.json(users)
+  try {
+    const users = await User.findAll()
+    return res.json(users)
+  } catch (e) {
+    console.error(e)
+  }
 })
 
 app.get('/user/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id)
+  return res.json(user)
+})
+
+app.get('/user/:id/summary', async (req, res) => {
+  const user = await User.findByPk(req.params.id, { attributes: ['id', 'firstName', 'lastName'] })
   return res.json(user)
 })
 
